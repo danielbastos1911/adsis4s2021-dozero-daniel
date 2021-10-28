@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,10 +14,17 @@ import org.springframework.web.bind.annotation.RestController;
 public class CarroController {
 	@Autowired
 	private CarroSerive service;
-	
+
 	@GetMapping
-	public List<Carro> obterTodos(){
+	public List<Carro> obterTodos() {
 		return service.obterTodos();
 	}
-
+	
+	
+	@PostMapping
+	public String criarNovo(@RequestBody Carro novo) {
+		service.criar(novo);
+		return novo.getId();
+	}
+	
 }
